@@ -35,7 +35,6 @@ impl Solution {
     }
     pub fn partition_labels(s: String) -> Vec<i32> {
         use std::collections::HashMap;
-
         let mut last_id_map = HashMap::<char, usize>::new();
         let mut anchor: usize = 0;
         let mut start: usize = 0;
@@ -55,5 +54,21 @@ impl Solution {
             }
         }
         result
+    }
+    pub fn partition_labels_no_map(s: String) -> Vec<i32> {
+        let mut map = [0; 26];
+        for (i, c) in s.bytes().enumerate() {
+            map[c as usize - 'a' as usize] = i as i32;
+        }
+        let mut res = vec![];
+        let (mut i, mut j) = (0, 0);
+        for (k, c) in s.bytes().enumerate() {
+            j = std::cmp::max(j, map[c as usize - 'a' as usize]);
+            if j == k as i32 {
+                res.push(j - i + 1);
+                i = j + 1;
+            }
+        }
+        res
     }
 }
