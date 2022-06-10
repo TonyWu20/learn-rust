@@ -11,7 +11,7 @@ impl Solution {
             _ => (high - low) / 2 + 1,
         }
     }
-    pub fn count_odds(low: i32, high: i32) -> i32 {
+    pub fn count_odds_2(low: i32, high: i32) -> i32 {
         let a: i32 = (high - low + 1) % 2;
         let b = if (high + low) % 2 == 0 { low % 2 } else { 0 };
         a + b
@@ -21,7 +21,7 @@ impl Solution {
     the ith employee. Return the average salary of employees excluding the minimum and
     maximum salary. Answers within 10-5 of the actual answer will be accepted.
     */
-    pub fn average(salary: Vec<i32>) -> f64 {
+    pub fn average(mut salary: Vec<i32>) -> f64 {
         salary.sort_unstable();
         (salary[2..salary.len() - 1].iter().sum::<i32>() as f64) / (salary.len() - 2) as f64
     }
