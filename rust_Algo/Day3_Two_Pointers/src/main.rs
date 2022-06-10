@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 fn main() {
     println!("Hello, world!");
 }
@@ -24,13 +26,10 @@ impl Solution {
         let mut hi: usize = numbers.len() - 1;
         while lo < hi {
             let curr: i32 = numbers[lo] + numbers[hi];
-            if curr == target {
-                break;
-            }
-            if curr > target {
-                hi -= 1;
-            } else {
-                lo += 1;
+            match curr.cmp(&target) {
+                Ordering::Less => lo += 1,
+                Ordering::Greater => hi -= 1,
+                Ordering::Equal => break,
             }
         }
         let result: Vec<i32> = vec![(lo as i32) + 1, (hi as i32) + 1];
